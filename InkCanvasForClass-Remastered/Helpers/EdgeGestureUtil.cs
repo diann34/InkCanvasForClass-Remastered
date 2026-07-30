@@ -157,10 +157,6 @@ namespace InkCanvasForClass_Remastered.Helpers
         #endregion
 
         #region "Methods"
-
-        //[DllImport("shell32.dll", SetLastError = true)]
-        //private static extern int SHGetPropertyStoreForWindow(IntPtr handle, ref Guid riid, ref IPropertyStore propertyStore);
-
         public unsafe static void DisableEdgeGestures(IntPtr hwnd, bool enable)
         {
             IPropertyStore pPropStore = null;

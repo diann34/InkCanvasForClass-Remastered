@@ -8,34 +8,6 @@ namespace InkCanvasForClass_Remastered.Helpers
 {
     internal class ForegroundWindowInfo
     {
-        //[DllImport("user32.dll")]
-        //private static extern IntPtr GetForegroundWindow();
-
-        //[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        //private static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
-
-        //[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        //private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
-
-        //[DllImport("user32.dll")]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //private static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-        //[DllImport("user32.dll")]
-        //private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
-
-        //[StructLayout(LayoutKind.Sequential)]
-        //public struct RECT
-        //{
-        //    public int Left;
-        //    public int Top;
-        //    public int Right;
-        //    public int Bottom;
-
-        //    public int Width => Right - Left;
-        //    public int Height => Bottom - Top;
-        //}
-
         public static string WindowTitle()
         {
             IntPtr foregroundWindowHandle = PInvoke.GetForegroundWindow();

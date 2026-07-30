@@ -348,9 +348,6 @@ namespace InkCanvasForClass_Remastered
             _settingsService.SaveSettings();
         }
 
-        //[DllImport("user32.dll", SetLastError = true)]
-        //public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
-
         private void MainWindow_OnSizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (Settings.IsEnableForceFullScreen)
@@ -5002,20 +4999,6 @@ namespace InkCanvasForClass_Remastered
         public static IntPtr GetWindowLong(IntPtr hWnd, int nIndex) => PInvoke.GetWindowLong((Windows.Win32.Foundation.HWND)hWnd, (WINDOW_LONG_PTR_INDEX)nIndex);
 
         public static IntPtr SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong) => PInvoke.SetWindowLong((Windows.Win32.Foundation.HWND)hWnd, (WINDOW_LONG_PTR_INDEX)nIndex, (int)dwNewLong);
-
-
-        //[DllImport("user32.dll", EntryPoint = "GetWindowLong")]
-        //private static extern IntPtr GetWindowLong32(IntPtr hWnd, int nIndex);
-
-        //[DllImport("user32.dll", EntryPoint = "GetWindowLongPtr")]
-        //private static extern IntPtr GetWindowLong64(IntPtr hWnd, int nIndex);
-
-        //[DllImport("user32.dll", EntryPoint = "SetWindowLong")]
-        //private static extern IntPtr SetWindowLong32(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
-
-        //[DllImport("user32.dll", EntryPoint = "SetWindowLongPtr")]
-        //private static extern IntPtr SetWindowLong64(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
-
         #endregion
 
         private void SymbolIconTools_MouseUp(object sender, MouseButtonEventArgs e)

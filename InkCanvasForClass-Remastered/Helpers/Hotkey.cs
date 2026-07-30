@@ -10,15 +10,6 @@ namespace InkCanvasForClass_Remastered
 {
     static class Hotkey
     {
-        #region 系统api
-        //[DllImport("user32.dll")]
-        //[return: MarshalAs(UnmanagedType.Bool)]
-        //static extern bool RegisterHotKey(IntPtr hWnd, int id, HotkeyModifiers fsModifiers, uint vk);
-
-        //[DllImport("user32.dll")]
-        //static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-        #endregion
-
         /// <summary>
         /// 注册快捷键
         /// </summary>
