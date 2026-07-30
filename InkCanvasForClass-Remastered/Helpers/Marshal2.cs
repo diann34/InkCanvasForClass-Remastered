@@ -2,6 +2,7 @@
 using System.Runtime.Versioning;
 using System.Security;
 using Windows.Win32;
+using Windows.Win32.Foundation;
 
 namespace InkCanvasForClass_Remastered.Helpers
 {
@@ -11,23 +12,31 @@ namespace InkCanvasForClass_Remastered.Helpers
         internal const string OLE32 = "ole32.dll";
 
         [System.Security.SecurityCritical]  // auto-generated_required
-        public unsafe static object GetActiveObject(string progID)
+        public static unsafe object GetActiveObject(string progID)
         {
-            Guid clsid;
+            if (string.IsNullOrEmpty(progID))
+                throw new ArgumentNullException(nameof(progID));
 
-            // Call CLSIDFromProgIDEx first then fall back on CLSIDFromProgID if
-            // CLSIDFromProgIDEx doesn't exist.
-            try
+            HRESULT hr;
+
+            hr = PInvoke.CLSIDFromProgIDEx(progID, out Guid clsid);
+
+            if (hr.Failed)
             {
-                PInvoke.CLSIDFromProgIDEx(progID, out clsid);
-            }
-            //            catch
-            catch (Exception)
-            {
-                PInvoke.CLSIDFromProgID(progID, out clsid);
+                hr = PInvoke.CLSIDFromProgID(progID, out clsid);
             }
 
-            PInvoke.GetActiveObject(ref clsid, null, out object obj);
+            if (hr.Failed)
+            {
+                Marshal.ThrowExceptionForHR(hr);
+            }
+            hr = PInvoke.GetActiveObject(in clsid, null, out object obj);
+
+            if (hr.Failed)
+            {
+                Marshal.ThrowExceptionForHR(hr);
+            }
+
             return obj;
         }
     }

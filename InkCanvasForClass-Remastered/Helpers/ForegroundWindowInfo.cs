@@ -8,26 +8,46 @@ namespace InkCanvasForClass_Remastered.Helpers
 {
     internal class ForegroundWindowInfo
     {
-        public static string WindowTitle()
+        public unsafe static string WindowTitle()
         {
-            IntPtr foregroundWindowHandle = PInvoke.GetForegroundWindow();
-
             const int nChars = 256;
-            StringBuilder windowTitle = new(nChars);
-            _ = PInvoke.GetWindowText(new HWND(foregroundWindowHandle), new Span<char>(windowTitle.ToString().ToCharArray()));
+            IntPtr buffer = Marshal.AllocHGlobal(nChars * sizeof(char));
+            try
+            {
+                PWSTR pWindowTitle = new((char*)buffer);
+                int length = PInvoke.GetWindowText(PInvoke.GetForegroundWindow(), pWindowTitle, nChars);
 
-            return windowTitle.ToString();
+                if (length > 0)
+                {
+                    return Marshal.PtrToStringUni(buffer, length);
+                }
+                return string.Empty;
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(buffer);
+            }
         }
 
-        public static string WindowClassName()
+        public unsafe static string WindowClassName()
         {
-            IntPtr foregroundWindowHandle = PInvoke.GetForegroundWindow();
-
             const int nChars = 256;
-            StringBuilder className = new(nChars);
-            _ = PInvoke.GetClassName(new HWND(foregroundWindowHandle), new Span<char>(className.ToString().ToCharArray()));
+            IntPtr buffer = Marshal.AllocHGlobal(nChars * sizeof(char));
+            try
+            {
+                PWSTR pWindowTitle = new((char*)buffer);
+                int length = PInvoke.GetClassName(PInvoke.GetForegroundWindow(), pWindowTitle, nChars);
 
-            return className.ToString();
+                if (length > 0)
+                {
+                    return Marshal.PtrToStringUni(buffer, length);
+                }
+                return string.Empty;
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(buffer);
+            }
         }
 
         public static RECT WindowRect()
