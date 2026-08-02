@@ -167,7 +167,7 @@ namespace InkCanvasForClass_Remastered.Helpers
                 hr = PInvoke.SHGetPropertyStoreForWindow(new HWND(hwnd), ptr, out object? pPS);
                 if (hr.Succeeded && pPS is IPropertyStore store)
                     pPropStore = store;
-                pPropStore = (IPropertyStore)pPS;
+                //pPropStore = (IPropertyStore)pPS;
             }
 
             if (hr.Succeeded && pPropStore is not null)
